@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Sea Battle</title>
+    <link rel="stylesheet" href="lib/style.css">
+    <script type="text/javascript" src="lib/jquery-3.3.1.min.js"></script>
+</head>
+<body>
+    <div class="mask"></div>
+    <div class="result hidden-top">
+        <div class="result-info"></div>
+        <div class="result-button open-menu"></div>
+        <div class="result-button restart"></div>
+    </div>
+    <div class="menu">
+        <div class="menu-title">
+            МОРСКОЙ БОЙ
+        </div>
+        <div class="menu-body">
+            <div class="container-v-20">
+                <div class="container-component">
+                    Ваше имя
+                </div>
+                <div class="container-component">
+                    <input class="player-name" type="text" maxlength="20">
+                </div>
+            </div>
+            <div class="container-v-20">
+                <div class="container-component">
+                    Уровень сложности
+                </div>
+                <div class="container-component">
+                    <select name="ai-level">
+                        <option value="0">Легкий</option>
+                        <option value="1">Средний</option>
+                        <option value="2">Сложный</option>
+                    </select>
+                </div>
+            </div>
+            <div class="container-v-20">
+                <div class="container-component">
+                    Время рекации ИИ (сек)
+                </div>
+                <div class="container-component">
+                    <input class="ai-timeout" type="number" min="0" max="5000" value="500">
+                </div>
+            </div>
+            <div class="container-v-20">
+                <div class="button start-game">
+                    Начать игру
+                </div>
+            </div>
+            <div class="container-v-20">
+                <div class="button help">
+                    Помощь
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="help-container hidden-top">
+        <div class="help-content">
+            <h3 style="font-weight: bold">Игра "Морской бой"</h3>
+            <p>Автор: Хамитов Марат</p>
+            <p>email: nefritor@gmail.com</p>
+            <p>
+                Верхняя часть экрана отображает текущий ход, указывая стрелкой, и наименование полей.
+                При наведении на надпись "Текущий ход", будут отображены кнопки перехода в меню
+                (три горизонтальные палочки) и перезапуска игры.
+            </p>
+            <p>
+                Игровое поле пользователя имеет серые клетки, они же – "корабли". Корабли на поле противника невидимы.
+                Подбитая часть корабля помечается <span style="color: #a58f05">желтым цветом</span>.
+                Если же корабль уничтожить – он пометится <span style="color: #a50000">красным цветом.</span>
+                Место промаха помечается <span style="color: #3e3e84">темно-синим цветом.</span>
+            </p>
+            <p>
+                Нижняя часть экрана отображает текущее состояние боевой силы: количество кораблей.
+            </p>
+            <h6>
+                Весь созданный дизайн игры является собственной разработкой автора.
+            </h6>
+        </div>
+        <div class="help-close">
+            Закрыть
+        </div>
+    </div>
+    <div class="turn">
+        <div class="turn-buttons open-menu">
+
+        </div>
+        <div class="turn-buttons restart">
+
+        </div>
+        <div class="turn-label">Текущий ход</div>
+    </div>
+    <div class="playground">
+        <div class="current-turn">
+            <svg height="50px" width="50px" viewBox="0 0 41.999 41.999" class="arrow-svg arrow-left">
+                <path d="M36.068,20.176l-29-20C6.761-0.035,6.363-0.057,6.035,0.114C5.706,0.287,5.5,0.627,5.5,0.999v40
+                c0,0.372,0.206,0.713,0.535,0.886c0.146,0.076,0.306,0.114,0.465,0.114c0.199,0,0.397-0.06,0.568-0.177l29-20
+                c0.271-0.187,0.432-0.494,0.432-0.823S36.338,20.363,36.068,20.176z" style="fill: #fff; stroke: #dfe1e5;"></path>
+            </svg>
+        </div>
+        <div class="player-field battle-area active-area">
+            <div class="battle-area-title">
+                Ваше поле
+            </div>
+            <div class="battle-area-main">
+                <div class="battle-area-container">
+                    <div class="battle-area-container-left">
+                        <div class="table-labels-v"></div>
+                    </div>
+                    <div class="battle-area-container-right">
+                        <div class="table-labels-h cell-horizontal"></div>
+                        <div class="battle-area-table" disabled></div>
+                    </div>
+                </div>
+            </div>
+            <div class="battle-area-info">
+                <div class="battle-ship">
+                    <div class="battle-ship-4 ship battle-ship-count hidden">1</div>
+                </div>
+                <div class="battle-ship">
+                    <div class="battle-ship-3 ship battle-ship-count hidden">2</div>
+                </div>
+                <div class="battle-ship">
+                    <div class="battle-ship-2 ship battle-ship-count hidden">3</div>
+                </div>
+                <div class="battle-ship">
+                    <div class="battle-ship-1 ship battle-ship-count hidden">4</div>
+                </div>
+            </div>
+        </div>
+        <div class="ai-field battle-area">
+            <div class="battle-area-title">
+                Поле противника
+            </div>
+            <div class="battle-area-main">
+                <div class="battle-area-container">
+                    <div class="battle-area-container-left">
+                        <div class="table-labels-v"></div>
+                    </div>
+                    <div class="battle-area-container-right">
+                        <div class="table-labels-h cell-horizontal"></div>
+                        <div class="battle-area-table"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="battle-area-info">
+                <div class="battle-ship">
+                    <div class="battle-ship-4 ship battle-ship-count hidden">1</div>
+                </div>
+                <div class="battle-ship">
+                    <div class="battle-ship-3 ship battle-ship-count hidden">2</div>
+                </div>
+                <div class="battle-ship">
+                    <div class="battle-ship-2 ship battle-ship-count hidden">3</div>
+                </div>
+                <div class="battle-ship">
+                    <div class="battle-ship-1 ship battle-ship-count hidden">4</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="lib/main.js"></script>
+</body>
+</html>
