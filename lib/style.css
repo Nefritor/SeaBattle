@@ -297,10 +297,10 @@ p {
     z-index: 3;
     position: fixed;
     background-color: #fff;
-    height: 50vh;
+    height: 400px;
     width: 500px;
     left: calc(50vw - 250px);
-    top: 25vh;
+    top: calc(50vh - 200px);
     border-radius: 5px;
     transition: all .3s ease;
     overflow: hidden;
